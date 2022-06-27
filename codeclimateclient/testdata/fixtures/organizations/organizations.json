@@ -1,0 +1,35 @@
+{
+  "data": [
+    {
+      "id": "5be2f19ed0107402c20021bf",
+      "type": "orgs",
+      "attributes": {
+        "name": "testorg1"
+      },
+      "meta": {
+        "counts": {
+          "repos": 37
+        },
+        "permissions": {
+          "admin": true
+        }
+      }
+    },
+    {
+      "id": "5f2176144f78f5011f002a89",
+      "type": "orgs",
+      "attributes": {
+        "name": "testorg2"
+      },
+      "meta": {
+        "counts": {
+          "repos": 1
+        },
+        "permissions": {
+          "admin": true
+        }
+      }
+    }
+  ],
+  "links": {}
+}
