@@ -3,16 +3,13 @@
 name: Test and Release
 
 on:
-  pull_request:
-    branches: [ production ]
   push:
     tags:
     - 'v*'
 
 jobs:
-
   test:
-    name: Release Test
+    name: Test
     runs-on: ubuntu-latest
     steps:
 
@@ -40,75 +37,37 @@ jobs:
         make vet
         make test
   # See https://github.com/actions/upload-release-asset
-  build:
-    name: Build and Release
-    needs: test
-    if: startsWith( github.event.ref, 'refs/tags/v' )
+  goreleaser:
+    name: Release
     runs-on: ubuntu-latest
     steps:
-
-    - name: set up Go 1.13
-      uses: actions/setup-go@v1
-      with:
-        go-version: 1.13
-
-    - name: check out code into the Go module directory
-      uses: actions/checkout@v2
-
-    - name: get dependencies
-      run: |
-        go get -v -t -d ./...
-        if [ -f Gopkg.toml ]; then
-            curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
-            dep ensure
-        fi
-    - name: parse version string
-      id: parse_version
-      run: |
-        export BUILD_VERSION=$(echo $GITHUB_REF | sed -e 's/refs.tags.\(.*\)$/\1/')
-        export BUILD_NAME=terraform-provider-codeclimate_$BUILD_VERSION
-        echo "::set-output name=BUILD_NAME::$BUILD_NAME"
-        echo ::set-output name=ZIP_NAME_LINUX::"$BUILD_NAME"_linux_amd64.zip
-        echo ::set-output name=ZIP_NAME_DARWIN::"$BUILD_NAME"_darwin_amd64.zip
-    - name: build Linux
-      run: |
-        make build-linux
-        mv terraform-provider-codeclimate ${{ steps.parse_version.outputs.BUILD_NAME }}
-        zip --junk-paths ${{ steps.parse_version.outputs.ZIP_NAME_LINUX }} ${{ steps.parse_version.outputs.BUILD_NAME }}
-    - name: build Darwin
-      run: |
-        make build-darwin
-        mv terraform-provider-codeclimate ${{ steps.parse_version.outputs.BUILD_NAME }}
-        zip --junk-paths ${{ steps.parse_version.outputs.ZIP_NAME_DARWIN }} ${{ steps.parse_version.outputs.BUILD_NAME }}
-    - name: create release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false
-
-    - name: upload Release Asset Linux
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./${{ steps.parse_version.outputs.ZIP_NAME_LINUX }}
-        asset_name: ${{ steps.parse_version.outputs.ZIP_NAME_LINUX }}
-
-        asset_content_type: application/zip
-
-    - name: Upload Release Asset Darwin
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./${{ steps.parse_version.outputs.ZIP_NAME_DARWIN }}
-        asset_name: ${{ steps.parse_version.outputs.ZIP_NAME_DARWIN }}
-
-        asset_content_type: application/zip
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Unshallow
+        run: git fetch --prune --unshallow
+      -
+        name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version-file: 'go.mod'
+          cache: true
+      -
+        name: Import GPG key
+        id: import_gpg
+        uses: hashicorp/ghaction-import-gpg@v2.1.0
+        env:
+          # These secrets will need to be configured for the repository:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          PASSPHRASE: ${{ secrets.PASSPHRASE }}
+      -
+        name: Run GoReleaser
+        uses: goreleaser/goreleaser-action@v3.0.0
+        with:
+          version: latest
+          args: release --rm-dist
+        env:
+          GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
+          # GitHub sets this automatically
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

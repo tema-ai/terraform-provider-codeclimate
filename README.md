@@ -22,53 +22,7 @@ make build
 Using the provider
 ----------------------
 
-Currently the provider supports just retreaving the repository as data source.
-
-```hcl
-provider "codeclimate" {
-  api_key = "${var.api_key}"        # Will fallback to CODECLIMATE_TOKEN environment variable if not explicitly specified.
-}
-
-data "codeclimate_repository" "test" {
-  repository_slug = "babbel/test"
-}
-```
-
-Get organization information
-
-```hcl
-provider "codeclimate" {
-  api_key = "${var.api_key}"
-}
-
-data "codeclimate_organization" "babbel" {
-  name = "babbel"
-}
-```
-
-Create codeclimate repository
-
-```hcl
-provider "codeclimate" {
-  api_key = "${var.api_key}"
-}
-
-data "codeclimate_organization" "babbel" {
-  name = "babbel"
-}
-
-resource "codeclimate_repository" "codeclimate_terraform_test" {
-  repository_url  = "https://github.com/babbel/codeclimate_terraform_test"
-  organization_id = data.codeclimate_organization.babbel.id
-}
-```
-
-
-Importing repository
-
-```
-terraform import codeclimate_repository.codeclimate_terraform_test babbel/codeclimate_terraform_test
-```
+Please refer to the Terraform registry documentation **[here](...)**
 
 
 Developing the Provider
@@ -84,11 +38,21 @@ $ go test ./...
 
 Github Releases
 ---------------------------
-In order to push a release to Github the feature branch has to be merged into master and then a tag needs to be created with the version name of the provider e.g. **v0.0.1** and pushed.
+In order to push a release to Github the feature branch has to be merged into production and then a tag needs to be created with the version name of the provider e.g. **v0.0.1** and pushed.
 
 ```sh
-git checkout master
-git pull origin master
+git checkout production
+git pull origin production
 git tag v<semver>
-git push origin master --tags
+git push origin production --tags
 ```
+
+Adding to the Terraform registry
+--------------------------------
+You can follow [this](https://learn.hashicorp.com/tutorials/terraform/provider-release-publish?in=terraform/providers#gpg_private_key) tutorial to add the provider to the terraform registry.
+
+Acknowledgements
+----------------
+Original provider module by:
+  - [travelaudience/terraform-provider-codeclimate](https://github.com/travelaudience/terraform-provider-codeclimate)
+  - [babbel/terraform-provider-codeclimate](https://github.com/babbel/terraform-provider-codeclimate)
