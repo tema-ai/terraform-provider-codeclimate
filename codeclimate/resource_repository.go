@@ -38,27 +38,27 @@ func resourceRepository() *schema.Resource {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
-			"link_services": {
+			"services": {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
-			"link_self": {
+			"self": {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
-			"link_web_coverage": {
+			"web_coverage": {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
-			"link_web_issues": {
+			"web_issues": {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
-			"link_maintainability_badge": {
+			"maintainability_badge": {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
-			"link_test_coverage_badge": {
+			"test_coverage_badge": {
 				Type:     schema.TypeString,
 				Computed: true,
 			},
@@ -103,27 +103,27 @@ func resourceRepositoryRead(d *schema.ResourceData, client interface{}) error {
 	if err != nil {
 		return err
 	}
-	err = d.Set("link_services", repository.LinkServices)
+	err = d.Set("services", repository.LinkServices)
 	if err != nil {
 		return err
 	}
-	err = d.Set("link_self", repository.LinkSelf)
+	err = d.Set("self", repository.LinkSelf)
 	if err != nil {
 		return err
 	}
-	err = d.Set("link_web_coverage", repository.LinkWebCoverage)
+	err = d.Set("web_coverage", repository.LinkWebCoverage)
 	if err != nil {
 		return err
 	}
-	err = d.Set("link_web_issues", repository.LinkWebIssues)
+	err = d.Set("web_issues", repository.LinkWebIssues)
 	if err != nil {
 		return err
 	}
-	err = d.Set("link_maintainability_badge", repository.LinkMaintainabilityBadge)
+	err = d.Set("maintainability_badge", repository.LinkMaintainabilityBadge)
 	if err != nil {
 		return err
 	}
-	err = d.Set("link_test_coverage_badge", repository.LinkTestCoverageBadge)
+	err = d.Set("test_coverage_badge", repository.LinkTestCoverageBadge)
 	return err
 }
 
