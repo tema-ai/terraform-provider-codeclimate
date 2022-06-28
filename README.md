@@ -22,7 +22,7 @@ make build
 Using the provider
 ----------------------
 
-Please refer to the Terraform registry documentation **[here](...)**
+Please refer to the Terraform registry documentation **[here](https://registry.terraform.io/providers/tema-ai/codeclimate/latest/docs)**
 
 
 Developing the Provider
