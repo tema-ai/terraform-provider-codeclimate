@@ -3,16 +3,13 @@
 name: Test and Release
 
 on:
-  pull_request:
-    branches: [ production ]
   push:
     tags:
     - 'v*'
 
 jobs:
-
   test:
-    name: Release Test
+    name: Test
     runs-on: ubuntu-latest
     steps:
 
@@ -41,6 +38,7 @@ jobs:
         make test
   # See https://github.com/actions/upload-release-asset
   goreleaser:
+    name: Release
     runs-on: ubuntu-latest
     steps:
       -
