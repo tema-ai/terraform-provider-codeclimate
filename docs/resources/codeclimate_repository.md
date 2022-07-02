@@ -34,7 +34,7 @@ terraform {
   required_version = "~> 1.1"
   required_providers {
     codeclimate = {
-      version = "~> 1.1.1"
+      version = "~> 1.0.4"
       source  = "tema.ai/tema/codeclimate"
     }
     aws = {
