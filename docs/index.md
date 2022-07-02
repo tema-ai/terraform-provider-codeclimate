@@ -21,7 +21,7 @@ terraform {
   required_providers {
     codeclimate = {
       source  = "tema.ai/codeclimate"
-      version = "~> 1.0.0"
+      version = "~> 1.0.4"
     }
   }
 }
@@ -46,7 +46,7 @@ terraform {
     }
     codeclimate = {
       source  = "tema.ai/codeclimate"
-      version = "~> 1.0.0"
+      version = "~> 1.0.4"
     }
   }
 }
