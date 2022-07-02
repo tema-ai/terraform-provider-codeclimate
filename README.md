@@ -45,7 +45,7 @@
   ·
   <a href="https://github.com/tema-ai/terraform-provider-codeclimate/issues/new/choose">Request Feature</a>
   ·
-  <a href="https://github.com/terraform-provider-codeclimate/tema.ai.backend/discussions">Ask Question</a>
+  <a href="https://github.com/tema-ai/terraform-provider-codeclimate/discussions">Ask Question</a>
 </p>
 
 -----------------------
