@@ -59,6 +59,14 @@ This new provider **[tema-ai/terraform-provider-codeclimate]()** solves this by 
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Using the provider](#using-the-provider)
+- [Working on the provider](#working-on-the-provider)
+  - [Github Releases](#github-releases)
+  - [Adding to the Terraform registry](#adding-to-the-terraform-registry)
+- [Acknowledgements](#acknowledgements)
+
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Using the provider
