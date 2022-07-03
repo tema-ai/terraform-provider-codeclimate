@@ -36,7 +36,12 @@
   <a href="https://github.com/tema-ai/terraform-provider-codeclimate/issues">
     <img alt="issues" src="https://img.shields.io/github/issues-raw/tema-ai/terraform-provider-codeclimate?logo=github"/>
   </a>
+  <a href="https://goreportcard.com/report/github.com/tema-ai/terraform-provider-codeclimate">
+    <img alt="go-report" src="https://goreportcard.com/badge/github.com/tema-ai/terraform-provider-codeclimate"/>
+  </a>
 </p>
+
+https://goreportcard.com/badge/github.com/tema-ai/terraform-provider-codeclimate
 
 <p align="center">
   <a href="#demo">View Demo</a>
