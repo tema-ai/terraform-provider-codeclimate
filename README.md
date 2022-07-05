@@ -39,9 +39,10 @@
   <a href="https://goreportcard.com/report/github.com/tema-ai/terraform-provider-codeclimate">
     <img alt="go-report" src="https://goreportcard.com/badge/github.com/tema-ai/terraform-provider-codeclimate"/>
   </a>
+  <a href="http://hits.dwyl.com/tema-ai/terraform-provider-codeclimate">
+    <img alt="go-report" src="https://hits.dwyl.com/tema-ai/terraform-provider-codeclimate.svg?style=flat"/>
+  </a>
 </p>
-
-https://goreportcard.com/badge/github.com/tema-ai/terraform-provider-codeclimate
 
 <p align="center">
   <a href="#demo">View Demo</a>
